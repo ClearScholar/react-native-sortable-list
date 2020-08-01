@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {ScrollView, View, StyleSheet, Platform, RefreshControl, ViewPropTypes} from 'react-native';
+import {ScrollView, View, StyleSheet, Platform, RefreshControl, ViewPropTypes, Platform} from 'react-native';
 import {shallowEqual, swapArrayElements} from './utils';
 import Row from './Row';
 
@@ -152,7 +152,8 @@ export default class SortableList extends Component {
     if (data && prevData && !shallowEqual(data, prevData)) {
       this._onUpdateLayouts();
     }
-    if (prevProps.scrollEnabled !== scrollEnabled) {
+    
+    if (Platform.OS == 'ios' && prevProps.scrollEnabled !== scrollEnabled) {
       this.setState({scrollEnabled: prevProps.scrollEnabled})
     }
   }
